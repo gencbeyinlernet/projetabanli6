@@ -2,7 +2,7 @@
 
 ## Güncel program
 
-Eğitim 3 saatlik tek bir oturumdur ve 45 dakikalık dört bölümden oluşur. Tarih bilgisi sitede yer almaz.
+Eğitim 9 Kasım 2026 Pazartesi saat 21.00’de (Türkiye saati) başlar. 3 saatlik tek bir oturumdur ve 45 dakikalık dört bölümden oluşur. Tarih ve saat `trainingInfo` içindeki `date`, `dateLabel` ve `startTime` alanlarından okunur.
 
 | Bölüm | Süre | Akış |
 | --- | --- | --- |
@@ -15,11 +15,11 @@ Her bölümdeki uygulama adımlarının dakikaları `src/data/curriculum.ts` iç
 
 Katılım: online, canlı eğitim + kayıt. Eğitmen: Burak TURGUT. Ana sayfadaki “Tüm kaynaklarımız” düğmesi https://gencbeyinlernet.github.io/projetabanli6/ adresini gösterir; site içinde tıklanınca Kaynaklar bölümünü açar.
 
-Eğitim tarihi, başlangıç saati ve ücret sitede yer almaz.
+Ücret sitede yer almaz.
 
 ## Önemli bilgilendirme
 
-Ana sayfadaki duyuru bölümü (`src/components/Announcement.tsx`), katılımcı duyurusunun metnini içerir: yaklaşık 2-3 saatlik uygulamalı eğitim, bilgisayarla katılım, Gmail (Google) hesabının hazır olması ve 300 kişilik kontenjan. Kılavuz bağlantısı bu siteyi (projetabanli6) gösterir.
+Ana sayfadaki duyuru bölümü (`src/components/Announcement.tsx`), katılımcı duyurusunun metnini içerir: yaklaşık 2-3 saatlik uygulamalı eğitim, bilgisayarla katılım, ChatGPT ve Claude’un ücretli sürümlerinin kullanılacağı (dileyenin eğitimden önce satın alabileceği), Gmail (Google) hesabının hazır olması ve 300 kişilik kontenjan. Kılavuz bağlantısı bu siteyi (projetabanli6) gösterir.
 
 Zoom bağlantısı, toplantı kimliği ve parola bilerek siteye ve depoya eklenmedi. Site ve depo herkese açık olduğu için bu bilgiler katılımcılara ayrıca iletilir.
 

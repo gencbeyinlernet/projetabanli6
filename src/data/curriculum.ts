@@ -37,6 +37,9 @@ export interface TrainingDay {
 
 export const trainingInfo = {
   "title": "GencbeyinlerNet Proje Tabanli Yapay Zeka Eğitimi",
+  "date": "2026-11-09T21:00:00+03:00",
+  "dateLabel": "9 Kasım 2026 Pazartesi",
+  "startTime": "21.00",
   "duration": "3 saat",
   "schedule": "4 bölüm × 45 dakika",
   "format": "Online · Canlı eğitim + kayıt",
@@ -444,9 +447,9 @@ export function toolDayLabel(tool: LearningTool) {
 
 // Shared program facts keep the assistant consistent with the site.
 export const curriculumContext = `${trainingInfo.title}
-Süre: ${trainingInfo.duration} (${trainingInfo.schedule}). Katılım: ${trainingInfo.format}. Araç sayısı: ${trainingInfo.toolCount}.
+Tarih: ${trainingInfo.dateLabel}, saat ${trainingInfo.startTime} (Türkiye saati). Süre: ${trainingInfo.duration} (${trainingInfo.schedule}). Katılım: ${trainingInfo.format}. Araç sayısı: ${trainingInfo.toolCount}.
 Katılımcılar: ${trainingInfo.audience}. Temel dijital beceriler yeterlidir. Tüm kaynaklarımız: ${trainingInfo.resourcesUrl}.
-Eğitim öncesi: Eğitim uygulamalı olduğu için bilgisayarla katılım önerilir. Gmail (Google) hesabı açık ve kullanıma hazır olmalıdır. Kontenjan ${trainingInfo.participantLimit} kişiyle sınırlıdır; eğitim başlamadan önce Zoom bağlantısına giriş yapılması önerilir. Zoom bağlantısı, toplantı kimliği ve parola katılımcılara özel iletilir ve sitede yer almaz.
+Eğitim öncesi: Eğitim uygulamalı olduğu için bilgisayarla katılım önerilir. Eğitimde ChatGPT ve Claude’un ücretli sürümleri kullanılacak; dileyen katılımcılar bu üyelikleri eğitimden önce satın alabilir. Gmail (Google) hesabı açık ve kullanıma hazır olmalıdır. Kontenjan ${trainingInfo.participantLimit} kişiyle sınırlıdır; eğitim başlamadan önce Zoom bağlantısına giriş yapılması önerilir. Zoom bağlantısı, toplantı kimliği ve parola katılımcılara özel iletilir ve sitede yer almaz.
 Eğitmen: ${trainingInfo.trainers.map(trainer => `${trainer.name}: ${trainer.role}`).join('; ')}.
 ` + trainingDays.map(day => `${day.id}. Bölüm (${day.timeRange}, ${day.duration}): ${day.title}. ${day.description}
 ${day.lessons.map(lesson => `${lesson.title} (${lesson.minutes} dk): ${lesson.description}`).join('\n')}

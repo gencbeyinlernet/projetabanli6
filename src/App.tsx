@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ArrowDown, ArrowRight, ArrowUpRight, BookOpen, Check, CheckCircle2, ChevronRight, Circle, Clock3, Copy, ExternalLink, Layers3, Monitor, Palette, Rocket, Search, Sparkles, Terminal, Timer } from 'lucide-react';
+import { ArrowDown, ArrowRight, ArrowUpRight, BookOpen, Check, CheckCircle2, ChevronRight, Circle, Clock3, Copy, ExternalLink, Layers3, Monitor, Palette, Rocket, Search, Sparkles, Terminal, CalendarDays } from 'lucide-react';
 import Header from './components/Header';
 import PromptBuilder from './components/PromptBuilder';
 import BrainAssistant from './components/BrainAssistant';
@@ -92,7 +92,7 @@ export default function App() {
       {currentTab === 'home' && <>
         <section className="hero">
           <div className="hero-copy">
-            <div className="eyebrow"><span className="status-dot" /> 3 SAATLİK ONLINE EĞİTİM</div>
+            <div className="eyebrow"><span className="status-dot" /> <span><time dateTime={trainingInfo.date}>{trainingInfo.dateLabel.toLocaleUpperCase('tr')} · SAAT {trainingInfo.startTime}</time> · ONLINE</span></div>
             <h1>Yapay zekâyla<br /><span>ders tasarlayacağız.</span></h1>
             <p>Yapay zekâya yalnızca soru sormayacağız.<br className="desktop-break" /> Birlikte planlayacak, üretecek ve sınıfımızda kullanacağımız projeler geliştireceğiz.</p>
             <div className="hero-actions"><button className="button primary" onClick={() => navigate('session1')}>Öğrenme yolculuğuna başla <ArrowUpRight size={19} /></button><a className="button subtle" href="#program">Programı incele <ArrowDown size={17} /></a></div>
@@ -114,7 +114,7 @@ export default function App() {
             <span className="visual-caption">FİKİR → PLAN → ÜRETİM → KONTROL</span>
           </div>
         </section>
-        <section className="event-overview" aria-labelledby="event-title"><h2 id="event-title">{trainingInfo.title}</h2><div className="event-facts"><div><Timer size={21} /><span>PROGRAM<strong>{trainingInfo.schedule}</strong></span></div><div><Clock3 size={21} /><span>SÜRE<strong>{trainingInfo.duration}</strong></span></div><div><Monitor size={21} /><span>KATILIM<strong>Online · Canlı + kayıt</strong></span></div><div><Layers3 size={21} /><span>İÇERİK<strong>{trainingInfo.toolCount} araç · Proje tabanlı</strong></span></div></div></section>
+        <section className="event-overview" aria-labelledby="event-title"><h2 id="event-title">{trainingInfo.title}</h2><div className="event-facts"><div><CalendarDays size={21} /><span>TARİH<strong><time dateTime={trainingInfo.date}>{trainingInfo.dateLabel} · {trainingInfo.startTime}</time></strong></span></div><div><Clock3 size={21} /><span>SÜRE<strong>{trainingInfo.duration} · {trainingInfo.schedule}</strong></span></div><div><Monitor size={21} /><span>KATILIM<strong>Online · Canlı + kayıt</strong></span></div><div><Layers3 size={21} /><span>İÇERİK<strong>{trainingInfo.toolCount} araç · Proje tabanlı</strong></span></div></div></section>
         <Announcement />
         <section className="principles" aria-label="Eğitim yaklaşımımız"><div><BookOpen size={21} /><span>Kendi dersimizden başlayacağız</span></div><div><Layers3 size={21} /><span>Adım adım üreteceğiz</span></div><div><CheckCircle2 size={21} /><span>Öğretmen kontrolüyle ilerleyeceğiz</span></div></section>
         <section className="program-section" id="program">
