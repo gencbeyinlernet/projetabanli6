@@ -1,38 +1,29 @@
-// Shape of the trainer script. The content itself ships only encrypted (script.enc.json).
-export interface TrainerBlock { label: string; text: string; code?: boolean }
+// Shape of the trainer step list. The content itself ships only encrypted (script.enc.json).
+export interface TrainerPrompt { label: string; text: string; code?: boolean }
 
 export interface TrainerStep {
-  id: string;
   title: string;
   minutes: number;
-  app: string;
-  why: string;
+  what: string;
   say: string[];
   do?: string[];
-  blocks?: TrainerBlock[];
-  transition?: string;
+  prompts?: TrainerPrompt[];
   check?: string;
-  fallback?: string[];
 }
 
-export interface TrainerSegment {
-  id: string;
-  time: string;
+export interface TrainerSection {
   title: string;
+  time: string;
   minutes: number;
-  closing?: string;
+  goal: string;
   steps: TrainerStep[];
 }
 
 export interface TrainerScript {
   title: string;
-  date: string;
-  goal: string;
-  memorable: string[];
-  prep: { title: string; items: string[] }[];
-  segments: TrainerSegment[];
-  phrases: { title: string; lines: string[] }[];
-  faq: { q: string; a: string }[];
+  subtitle: string;
+  before: string[];
+  sections: TrainerSection[];
 }
 
 export interface EncryptedPayload {
