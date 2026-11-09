@@ -71,7 +71,7 @@ export default function TrainerArea({ onExit }: { onExit: () => void }) {
       <p>Devam etmek için şifreyi girin.</p>
       <form onSubmit={submit}>
         <label htmlFor="trainer-password" className="sr-only">Şifre</label>
-        <input id="trainer-password" type="password" inputMode="numeric" autoComplete="current-password" placeholder="Şifre" value={password} onChange={event => { setPassword(event.target.value); if (status === 'error') setStatus('idle'); }} autoFocus />
+        <input id="trainer-password" type="password" autoComplete="current-password" autoCapitalize="none" autoCorrect="off" spellCheck={false} placeholder="Şifre" value={password} onChange={event => { setPassword(event.target.value); if (status === 'error') setStatus('idle'); }} autoFocus />
         <button className="button primary" type="submit" disabled={!password || status === 'checking'}>{status === 'checking' ? 'Açılıyor…' : 'Giriş'}</button>
       </form>
       {status === 'error' && <p className="trainer-lock-error" role="alert">Şifre hatalı. Tekrar deneyin.</p>}
