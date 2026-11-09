@@ -9,7 +9,7 @@ export const additionalResources: Resource[] = [
   {
     id: 'github-start',
     title: 'GitHub — proje ve sürüm yönetimi',
-    description: 'İlk gün depo, dosya ve sürüm kavramlarını öğreneceğiz; projemizin değişikliklerini GitHub ile takip edeceğiz.',
+    description: 'Son bölümde depo, dosya ve sürüm kavramlarını öğreneceğiz; projemizin değişikliklerini GitHub ile takip edeceğiz.',
     url: 'https://github.com'
   },
   {

@@ -1,6 +1,6 @@
 {
-  "name": "GencbeyinlerNet Proje Tabanli Yapay Zeka Eğitimi - Aralık 2026",
-  "description": "21–24 Aralık 2026: 27 araç, ChatGPT/Codex ve Claude ekosistemleri ile öğretmenler için uygulamalı proje tabanlı yapay zekâ eğitimi.",
+  "name": "GencbeyinlerNet Proje Tabanli Yapay Zeka Eğitimi",
+  "description": "3 saat, 4 bölüm, 15 araç: ChatGPT/Codex ve Claude ekosistemleri ile öğretmenler için uygulamalı proje tabanlı yapay zekâ eğitimi.",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"

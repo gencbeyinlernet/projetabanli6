@@ -1,6 +1,6 @@
-# GencbeyinlerNet Proje Tabanli Yapay Zeka Eğitimi - Aralık 2026
+# GencbeyinlerNet Proje Tabanli Yapay Zeka Eğitimi
 
-Öğretmenler için dört günlük uygulama kılavuzu. Eğitim günleri, araçların kullanım amaçları, örnek görevler ve istem atölyesi içerir.
+Öğretmenler için 3 saatlik uygulama kılavuzu. 45 dakikalık dört bölüm, araçların kullanım amaçları, örnek görevler ve istem atölyesi içerir.
 
 ## Geliştirme
 
@@ -39,11 +39,11 @@ npm run build:pages
 
 Bu derleme yalnızca statik site dosyalarını içerir. Göreli dosya yolları, `/projetabanli6/` altında yayınlanmayı destekler. Eğitim içerikleri, güncel araç listesi, ilerleme takibi, istem atölyesi ve WhatsApp/e-posta iletişim seçimi çalışır. Sunucu gerektiren sohbet düğmesi Pages sürümünde gösterilmez; normal geliştirme ve Node.js üretim sürümünde kullanılabilir.
 
-İş akışı başarılı olduktan sonra GitHub'ın deployment çıktısındaki site adresini açın. Ana sayfa, dört eğitim günü, araç filtreleri ve başvuru bağlantısını kontrol edin. API anahtarı Pages derlemesine veya Actions adımlarına eklenmemelidir.
+İş akışı başarılı olduktan sonra GitHub'ın deployment çıktısındaki site adresini açın. Ana sayfa, dört eğitim bölümü, araç filtreleri ve başvuru bağlantısını kontrol edin. API anahtarı Pages derlemesine veya Actions adımlarına eklenmemelidir.
 
 ## İçerik düzenleme
 
-Güncel programın ve güne özel araçların ortak kaynağı `src/data/curriculum.ts` dosyasıdır. Site ve sohbet asistanı aynı program bilgisini kullanır. Kaynak belgelerin kapsamı ve gün dağılımı için `docs/icerik-kaynaklari.md` dosyasına bakın.
+Güncel programın ve bölüme özel araçların ortak kaynağı `src/data/curriculum.ts` dosyasıdır. Site ve sohbet asistanı aynı program bilgisini kullanır. Kaynak belgelerin kapsamı ve bölüm dağılımı için `docs/icerik-kaynaklari.md` dosyasına bakın.
 
 İlerleme bilgisi yalnızca kullanıcının tarayıcısındaki yerel depolamada saklanır; sunucuya gönderilmez.
 
@@ -51,4 +51,4 @@ Güncel programın ve güne özel araçların ortak kaynağı `src/data/curricul
 
 GitHub'a yüklenen iki JPEG, `src/data/brand.ts` üzerinden kullanılır. Logo üst bölümde, kurum tanıtımında, alt bölümde ve sekme simgesinde gösterilir. Kurum bağlantıları `https://www.gencbeyinler.net/` adresini yeni sekmede açar; kılavuzun yayın adresi GitHub Pages olarak kalır.
 
-Araç kutusu afişi Kaynaklar bölümündedir ve tam boy açılabilir. Afiş genel bir araç haritasıdır; içindeki araç ve ücret etiketleri, eğitimdeki güncel 27 araçlık listeden farklı olabilir. Görsel güncellendiğinde bu açıklama da gözden geçirilmelidir.
+Araç kutusu afişi Kaynaklar bölümündedir ve tam boy açılabilir. Afiş genel bir araç haritasıdır; içindeki araç ve ücret etiketleri, eğitimdeki güncel 15 araçlık listeden farklı olabilir. Görsel güncellendiğinde bu açıklama da gözden geçirilmelidir.

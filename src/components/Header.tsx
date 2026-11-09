@@ -14,7 +14,7 @@ export default function Header({ currentTab, onChangeTab }: HeaderProps) {
   }, [currentTab]);
   const items = [
     { id: 'home', label: 'Genel bakış' },
-    ...[1, 2, 3, 4].map(day => ({ id: `session${day}`, label: `${day}. Gün` })),
+    ...[1, 2, 3, 4].map(day => ({ id: `session${day}`, label: `${day}. Bölüm` })),
     { id: 'tools', label: 'Araç kutusu' },
     { id: 'resources', label: 'Kaynaklar' },
   ];
@@ -22,7 +22,7 @@ export default function Header({ currentTab, onChangeTab }: HeaderProps) {
     <div className="header-inner">
       <div className="brand">
         <a className="brand-mark" href={institutionUrl} target="_blank" rel="noopener noreferrer" aria-label="GencbeyinlerNet web sitesi, yeni sekme"><img src={logo} alt="GencbeyinlerNet logosu" width="900" height="900" /></a>
-        <button className="brand-home" onClick={() => onChangeTab('home')} aria-label={`${trainingInfo.title} ana sayfa`}>GencbeyinlerNet<span className="brand-caption">PROJE TABANLI YAPAY ZEKA EĞİTİMİ</span><span className="brand-month">ARALIK 2026</span></button>
+        <button className="brand-home" onClick={() => onChangeTab('home')} aria-label={`${trainingInfo.title} ana sayfa`}>GencbeyinlerNet<span className="brand-caption">PROJE TABANLI YAPAY ZEKA EĞİTİMİ</span><span className="brand-month">3 SAATLİK EĞİTİM</span></button>
       </div>
       <nav aria-label="Ana gezinme" className="desktop-nav">
         {items.map(item => <button key={item.id} id={`nav-${item.id}`} aria-current={currentTab === item.id ? 'page' : undefined} onClick={() => onChangeTab(item.id)}>{item.label}</button>)}
