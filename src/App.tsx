@@ -3,11 +3,12 @@ import { ArrowDown, ArrowRight, ArrowUpRight, BookOpen, Check, CheckCircle2, Che
 import Header from './components/Header';
 import PromptBuilder from './components/PromptBuilder';
 import BrainAssistant from './components/BrainAssistant';
-import ContactOptions from './components/ContactOptions';
 import ToolboxPoster from './components/ToolboxPoster';
+import Announcement from './components/Announcement';
 import { institutionUrl, logo } from './data/brand';
 import { learningTools, trainingDays, trainingInfo, toolAppearsOnDay, toolDayLabel, type LearningTool } from './data/curriculum';
 import { additionalResources } from './data/resourcesData';
+import { isPlainLeftClick } from './links';
 
 const dayIcons = { Sparkles, Terminal, Palette, Rocket };
 const dayPreviewTools: Record<number, string[]> = {
@@ -95,7 +96,7 @@ export default function App() {
             <h1>Yapay zekâyla<br /><span>ders tasarlayacağız.</span></h1>
             <p>Yapay zekâya yalnızca soru sormayacağız.<br className="desktop-break" /> Birlikte planlayacak, üretecek ve sınıfımızda kullanacağımız projeler geliştireceğiz.</p>
             <div className="hero-actions"><button className="button primary" onClick={() => navigate('session1')}>Öğrenme yolculuğuna başla <ArrowUpRight size={19} /></button><a className="button subtle" href="#program">Programı incele <ArrowDown size={17} /></a></div>
-            <div className="hero-meta"><span><span className="mini-avatars"><i>BT</i><i>TÖ</i></span> Burak Turgut & Türker Örün</span><span className="meta-divider" /><span>Canlı eğitim + kayıt</span></div>
+            <div className="hero-meta"><span><span className="mini-avatars"><i>BT</i></span> Burak Turgut</span><span className="meta-divider" /><span>Canlı eğitim + kayıt</span></div>
           </div>
           <div className="hero-visual" aria-label="Fikir, üretim ve test aşamalarını gösteren proje örneği">
             <div className="visual-grid" /><div className="visual-orb" />
@@ -114,6 +115,7 @@ export default function App() {
           </div>
         </section>
         <section className="event-overview" aria-labelledby="event-title"><h2 id="event-title">{trainingInfo.title}</h2><div className="event-facts"><div><Timer size={21} /><span>PROGRAM<strong>{trainingInfo.schedule}</strong></span></div><div><Clock3 size={21} /><span>SÜRE<strong>{trainingInfo.duration}</strong></span></div><div><Monitor size={21} /><span>KATILIM<strong>Online · Canlı + kayıt</strong></span></div><div><Layers3 size={21} /><span>İÇERİK<strong>{trainingInfo.toolCount} araç · Proje tabanlı</strong></span></div></div></section>
+        <Announcement />
         <section className="principles" aria-label="Eğitim yaklaşımımız"><div><BookOpen size={21} /><span>Kendi dersimizden başlayacağız</span></div><div><Layers3 size={21} /><span>Adım adım üreteceğiz</span></div><div><CheckCircle2 size={21} /><span>Öğretmen kontrolüyle ilerleyeceğiz</span></div></section>
         <section className="program-section" id="program">
           <div className="section-heading"><div><span className="eyebrow">ÖĞRENME YOLCULUĞUMUZ</span><h2>Üç saat. Dört bölüm. Birlikte üreteceğimiz bir proje.</h2><p>45 dakikalık her bölüm bir önceki adımı geliştirecek; öğrendiğimizi bir ürüne dönüştüreceğiz.</p></div><span className="section-number">01 — 04</span></div>
@@ -123,9 +125,9 @@ export default function App() {
         </section>
         <section className="tools-teaser"><div><span className="eyebrow">DOĞRU İŞ İÇİN DOĞRU ARAÇ</span><h2>Araçları ezberlemeyeceğiz.<br />Ne işe yaradıklarını öğrenerek kullanacağız.</h2><p>{trainingInfo.toolCount} farklı araç; hangi bölümde, hangi amaçla kullanacağımızı birlikte keşfedeceğiz.</p><button className="button dark" onClick={() => navigate('tools')}>Araç kutusunu aç <ArrowRight size={18} /></button><button className="poster-shortcut" onClick={() => navigate('resources')}>Görsel araç haritasını incele <ArrowUpRight size={16} /></button></div><div className="tool-cloud">{['codex', 'claude', 'claude-code', 'canva', 'gamma', 'netlify'].map(id => { const tool = learningTools.find(t => t.id === id)!; return <a key={id} href={tool.url} target="_blank" rel="noopener noreferrer" className={`cloud-tool day-color-${tool.day}`}><span className="tool-logo">{tool.label}</span><span>{tool.name}<small>{toolDayLabel(tool)}</small></span><ArrowUpRight size={16} /><span className="sr-only">Yeni sekmede açılır</span></a>; })}</div></section>
         <section className="closing-note"><span className="note-icon"><Sparkles size={24} /></span><div><h3>Profesyonel yazılımcı olmamız gerekmiyor.</h3><p>Problemi tanımlayacağız, doğru görev vereceğiz ve ortaya çıkan ürünü kontrol edeceğiz.</p></div><button onClick={() => navigate('prompt')}>İlk istemimizi yazalım <ArrowRight size={18} /></button></section>
-        <section className="training-details"><div className="audience-copy"><span className="eyebrow">KİMLER İÇİN?</span><h2>Kendi dersinde üreten tüm öğretmenler için.</h2><p>{trainingInfo.audience} katılabilir. Temel dijital becerilerle başlayacak; üç saatte içerik üretimi, etkileşimli materyal, kendi asistanımızı tasarlama ve proje yayınlama deneyimi kazanacağız.</p></div><div className="trainer-list"><span className="eyebrow">EĞİTMENLERİMİZ</span>{trainingInfo.trainers.map(trainer => <article key={trainer.name} className="trainer-card"><span>{trainer.initials}</span><div><h3>{trainer.name}</h3><p>{trainer.role}</p></div></article>)}</div></section>
+        <section className="training-details"><div className="audience-copy"><span className="eyebrow">KİMLER İÇİN?</span><h2>Kendi dersinde üreten tüm öğretmenler için.</h2><p>{trainingInfo.audience} katılabilir. Temel dijital becerilerle başlayacak; üç saatte içerik üretimi, etkileşimli materyal, kendi asistanımızı tasarlama ve proje yayınlama deneyimi kazanacağız.</p></div><div className="trainer-list"><span className="eyebrow">EĞİTMENİMİZ</span>{trainingInfo.trainers.map(trainer => <article key={trainer.name} className="trainer-card"><span>{trainer.initials}</span><div><h3>{trainer.name}</h3><p>{trainer.role}</p></div></article>)}</div></section>
         <section className="community-banner"><img src={logo} alt="GencbeyinlerNet logosu" width="900" height="900" loading="lazy" /><div><span className="eyebrow">GENCBEYİNLERNET İLE BİRLİKTE</span><h2>Üreten öğretmenlerin buluşma noktası.</h2><p>Eğitimlerimiz, paylaşımlarımız ve yeni duyurularımız için kurum sitemizi ziyaret edin.</p></div><a className="button institution-link" href={institutionUrl} target="_blank" rel="noopener noreferrer">www.gencbeyinler.net <ArrowUpRight size={18} /><span className="sr-only">Yeni sekmede açılır</span></a></section>
-        <section className="application-banner"><div><span className="eyebrow">3 SAATLİK ONLINE EĞİTİM · KONTENJAN SINIRLI</span><h2>Yapay zekâyla üreten öğretmenler topluluğuna katılın.</h2><p>Başvuru ve eğitim sorularınız için WhatsApp veya e-postayı seçebilirsiniz.</p></div><ContactOptions /></section>
+        <section className="application-banner"><div><span className="eyebrow">TÜM KAYNAKLARIMIZ</span><h2>Yapay zekâyla üreten öğretmenler için kaynaklarımız tek adreste.</h2><p>Eğitim programı, araç kutusu, rehberler ve istem atölyesi bu sitede.</p></div><a className="button primary" href={trainingInfo.resourcesUrl} onClick={event => { if (!isPlainLeftClick(event)) return; event.preventDefault(); navigate('resources'); }}>Tüm kaynaklarımız <ArrowUpRight size={18} /></a></section>
       </>}
 
       {day && lesson && <>

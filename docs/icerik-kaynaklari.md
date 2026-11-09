@@ -13,9 +13,15 @@ Eğitim 3 saatlik tek bir oturumdur ve 45 dakikalık dört bölümden oluşur. T
 
 Her bölümdeki uygulama adımlarının dakikaları `src/data/curriculum.ts` içindeki `minutes` alanında tutulur ve her bölümde toplam 45 dakikaya eşittir.
 
-Katılım: online, canlı eğitim + kayıt. Eğitmenler: Burak TURGUT ve Türker ÖRÜN. Başvuru ve iletişim: WhatsApp 0507 110 00 53 veya gencbeyinlernet@gmail.com. Kullanıcı düğmeye tıklayınca tercih ettiği kanalı seçer.
+Katılım: online, canlı eğitim + kayıt. Eğitmen: Burak TURGUT. Ana sayfadaki “Tüm kaynaklarımız” düğmesi https://gencbeyinlernet.github.io/projetabanli6/ adresini gösterir; site içinde tıklanınca Kaynaklar bölümünü açar.
 
-Eğitim tarihi, başlangıç saati, toplantı platformu ve ücret paylaşılmadı. WhatsApp bağlantısı hazır mesajı açar; e-posta seçeneği mailto bağlantısıyla gencbeyinlernet@gmail.com adresine yeni ileti oluşturur. Site otomatik mesaj veya e-posta göndermez.
+Eğitim tarihi, başlangıç saati ve ücret sitede yer almaz.
+
+## Önemli bilgilendirme
+
+Ana sayfadaki duyuru bölümü (`src/components/Announcement.tsx`), katılımcı duyurusunun metnini içerir: yaklaşık 2-3 saatlik uygulamalı eğitim, bilgisayarla katılım, Gmail (Google) hesabının hazır olması ve 300 kişilik kontenjan. Kılavuz bağlantısı bu siteyi (projetabanli6) gösterir.
+
+Zoom bağlantısı, toplantı kimliği ve parola bilerek siteye ve depoya eklenmedi. Site ve depo herkese açık olduğu için bu bilgiler katılımcılara ayrıca iletilir.
 
 ## Word belgesinin kullanımı
 
@@ -29,7 +35,7 @@ Depodaki **Proje Tabanlı Yapay Zekâ Eğitimi Paylaşımlar.docx** belgesi önc
 
 Görünen araç sayısı `trainingInfo.toolCount` alanından kullanılır. Bir araç farklı bölümlerde yeniden kullanılabilir; `alsoOnDays` alanı ve ortak filtre fonksiyonu bu ilişkiyi korur.
 
-`src/data/curriculum.ts`, eğitim adının, sürenin, iletişim adreslerinin, programın ve araçların ortak kaynağıdır. Site ve sohbet asistanı aynı bilgileri kullanır.
+`src/data/curriculum.ts`, eğitim adının, sürenin, kaynak adresinin, programın ve araçların ortak kaynağıdır. Site ve sohbet asistanı aynı bilgileri kullanır.
 
 Araç özellikleri, ücretler, kullanım limitleri ve erişim koşulları sağlayıcıya göre değişir.
 

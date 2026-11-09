@@ -37,9 +37,9 @@ npm run lint
 npm run build:pages
 ```
 
-Bu derleme yalnızca statik site dosyalarını içerir. Göreli dosya yolları, `/projetabanli6/` altında yayınlanmayı destekler. Eğitim içerikleri, güncel araç listesi, ilerleme takibi, istem atölyesi ve WhatsApp/e-posta iletişim seçimi çalışır. Sunucu gerektiren sohbet düğmesi Pages sürümünde gösterilmez; normal geliştirme ve Node.js üretim sürümünde kullanılabilir.
+Bu derleme yalnızca statik site dosyalarını içerir. Göreli dosya yolları, `/projetabanli6/` altında yayınlanmayı destekler. Eğitim içerikleri, güncel araç listesi, ilerleme takibi, istem atölyesi ve “Tüm kaynaklarımız” bağlantısı çalışır. Sunucu gerektiren sohbet düğmesi Pages sürümünde gösterilmez; normal geliştirme ve Node.js üretim sürümünde kullanılabilir.
 
-İş akışı başarılı olduktan sonra GitHub'ın deployment çıktısındaki site adresini açın. Ana sayfa, dört eğitim bölümü, araç filtreleri ve başvuru bağlantısını kontrol edin. API anahtarı Pages derlemesine veya Actions adımlarına eklenmemelidir.
+İş akışı başarılı olduktan sonra GitHub'ın deployment çıktısındaki site adresini açın. Ana sayfa, dört eğitim bölümü, araç filtreleri ve “Tüm kaynaklarımız” bağlantısını kontrol edin. API anahtarı Pages derlemesine veya Actions adımlarına eklenmemelidir.
 
 ## İçerik düzenleme
 

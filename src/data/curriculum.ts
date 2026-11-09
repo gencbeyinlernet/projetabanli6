@@ -41,20 +41,14 @@ export const trainingInfo = {
   "schedule": "4 bölüm × 45 dakika",
   "format": "Online · Canlı eğitim + kayıt",
   "toolCount": 15,
-  "applicationUrl": "https://linktr.ee/gencbeyinlernet",
-  "whatsappUrl": "https://api.whatsapp.com/send?phone=905071100053&text=Merhaba%2C%20web%20sitenizden%20yaz%C4%B1yorum.",
-  "email": "gencbeyinlernet@gmail.com",
+  "resourcesUrl": "https://gencbeyinlernet.github.io/projetabanli6/",
+  "participantLimit": 300,
   "audience": "Tüm branşlardan öğretmenler ve öğretmen adayları",
   "trainers": [
     {
       "name": "Burak TURGUT",
       "role": "Bilişim Teknolojileri Öğretmeni & Yapay Zekâ Uzmanı",
       "initials": "BT"
-    },
-    {
-      "name": "Türker ÖRÜN",
-      "role": "Yapay Zekâ Uzmanı",
-      "initials": "TÖ"
     }
   ]
 } as const;
@@ -451,8 +445,9 @@ export function toolDayLabel(tool: LearningTool) {
 // Shared program facts keep the assistant consistent with the site.
 export const curriculumContext = `${trainingInfo.title}
 Süre: ${trainingInfo.duration} (${trainingInfo.schedule}). Katılım: ${trainingInfo.format}. Araç sayısı: ${trainingInfo.toolCount}.
-Katılımcılar: ${trainingInfo.audience}. Temel dijital beceriler yeterlidir. Başvuru ve iletişim: WhatsApp ${trainingInfo.whatsappUrl} veya e-posta ${trainingInfo.email}.
-Eğitmenler: ${trainingInfo.trainers.map(trainer => `${trainer.name}: ${trainer.role}`).join('; ')}.
+Katılımcılar: ${trainingInfo.audience}. Temel dijital beceriler yeterlidir. Tüm kaynaklarımız: ${trainingInfo.resourcesUrl}.
+Eğitim öncesi: Eğitim uygulamalı olduğu için bilgisayarla katılım önerilir. Gmail (Google) hesabı açık ve kullanıma hazır olmalıdır. Kontenjan ${trainingInfo.participantLimit} kişiyle sınırlıdır; eğitim başlamadan önce Zoom bağlantısına giriş yapılması önerilir. Zoom bağlantısı, toplantı kimliği ve parola katılımcılara özel iletilir ve sitede yer almaz.
+Eğitmen: ${trainingInfo.trainers.map(trainer => `${trainer.name}: ${trainer.role}`).join('; ')}.
 ` + trainingDays.map(day => `${day.id}. Bölüm (${day.timeRange}, ${day.duration}): ${day.title}. ${day.description}
 ${day.lessons.map(lesson => `${lesson.title} (${lesson.minutes} dk): ${lesson.description}`).join('\n')}
 Araçlar: ${learningTools.filter(tool => toolAppearsOnDay(tool, day.id)).map(tool => `${tool.name} (${tool.url}): ${tool.activity} ${tool.purpose}`).join('\n')}`).join('\n\n');
