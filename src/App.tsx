@@ -6,16 +6,16 @@ import BrainAssistant from './components/BrainAssistant';
 import ToolboxPoster from './components/ToolboxPoster';
 import Announcement from './components/Announcement';
 import { institutionUrl, logo } from './data/brand';
-import { learningTools, trainingDays, trainingInfo, toolAppearsOnDay, toolDayLabel, type LearningTool } from './data/curriculum';
+import { concepts, learningTools, project, trainingDays, trainingInfo, toolAppearsOnDay, toolDayLabel, type LearningTool } from './data/curriculum';
 import { additionalResources } from './data/resourcesData';
 import { isPlainLeftClick } from './links';
 
 const dayIcons = { Sparkles, Terminal, Palette, Rocket };
 const dayPreviewTools: Record<number, string[]> = {
-  1: ['chatgpt', 'claude', 'notebooklm'],
-  2: ['canva', 'canva-code', 'gamma'],
-  3: ['codex', 'claude-code', 'cowork'],
-  4: ['forms', 'github', 'netlify'],
+  1: ['chatgpt', 'claude', 'gemini'],
+  2: ['notebooklm', 'canva', 'canva-code'],
+  3: ['supabase', 'claude-code', 'codex'],
+  4: ['github', 'netlify', 'gamma'],
 };
 const progressKey = 'projetabanli6-completed-v1';
 const validLessonIds = new Set(trainingDays.flatMap(day => day.lessons.map(lesson => lesson.id)));
@@ -30,7 +30,7 @@ function ToolCard({ tool }: { tool: LearningTool }) {
   </article>;
 }
 
-function CopyBlock({ text, isCode = false }: { text: string; isCode?: boolean }) {
+function CopyBlock({ text, isCode = false, label }: { text: string; isCode?: boolean; label?: string }) {
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState(false);
   useEffect(() => { setCopied(false); setError(false); }, [text]);
@@ -44,7 +44,7 @@ function CopyBlock({ text, isCode = false }: { text: string; isCode?: boolean })
     catch { setError(true); }
   }
   return <div className={`copy-block ${isCode ? 'code-block' : ''}`}>
-    <div className="copy-heading"><span>{isCode ? 'Terminalde deneyeceğiz' : 'Birlikte deneyeceğimiz istem'}</span><button onClick={copy} aria-label="Örnek metni kopyala">{copied ? <Check size={15} /> : <Copy size={15} />}{copied ? 'Kopyalandı' : 'Kopyala'}</button></div>
+    <div className="copy-heading"><span>{label || (isCode ? 'Kopyalayıp kullanacağız' : 'Birlikte deneyeceğimiz istem')}</span><button onClick={copy} aria-label="Örnek metni kopyala">{copied ? <Check size={15} /> : <Copy size={15} />}{copied ? 'Kopyalandı' : 'Kopyala'}</button></div>
     <pre>{text}</pre>{error && <p role="status">Kopyalama kullanılamıyor. Metni seçerek kopyalayabilirsiniz.</p>}
   </div>;
 }
@@ -94,7 +94,7 @@ export default function App() {
           <div className="hero-copy">
             <div className="eyebrow"><span className="status-dot" /> <span><time dateTime={trainingInfo.date}>{trainingInfo.dateLabel.toLocaleUpperCase('tr')} · SAAT {trainingInfo.startTime}</time> · ONLINE</span></div>
             <h1>Yapay zekâyla<br /><span>ders tasarlayacağız.</span></h1>
-            <p>Yapay zekâya yalnızca soru sormayacağız.<br className="desktop-break" /> Birlikte planlayacak, üretecek ve sınıfımızda kullanacağımız projeler geliştireceğiz.</p>
+            <p>Yapay zekâya yalnızca soru sormayacağız.<br className="desktop-break" /> Temelden başlayıp veritabanı olan gerçek bir sınıf uygulamasını birlikte kuracak ve yayımlayacağız.</p>
             <div className="hero-actions"><button className="button primary" onClick={() => navigate('session1')}>Öğrenme yolculuğuna başla <ArrowUpRight size={19} /></button><a className="button subtle" href="#program">Programı incele <ArrowDown size={17} /></a></div>
             <div className="hero-meta"><span><span className="mini-avatars"><i>BT</i></span> Burak Turgut</span><span className="meta-divider" /><span>Canlı eğitim + kayıt</span></div>
           </div>
@@ -102,30 +102,48 @@ export default function App() {
             <div className="visual-grid" /><div className="visual-orb" />
             <div className="floating-note"><Sparkles size={16} /> Öğretmen fikri. Yapay zekâ desteği.</div>
             <div className="project-window">
-              <div className="window-bar"><span className="window-dots"><i /><i /><i /></span><span>öğrenme-projemiz</span><Layers3 size={14} /></div>
-              <div className="window-body"><div className="window-label">BUGÜN BİRLİKTE</div><h2>Bir öğrenme fikrini<br />hayata geçireceğiz.</h2><p>5. sınıf · Fen bilimleri · Fotosentez</p>
-                <div className="project-task"><span className="task-icon"><Check size={17} /></span><div>Problemi tanımlayacağız<small>Ne öğrenmelerini istiyoruz?</small></div><span className="task-step">01</span></div>
-                <div className="project-task active"><span className="task-icon"><Terminal size={17} /></span><div>Ajanla geliştireceğiz<small>Plan → Dosyalar → Uygulama</small></div><span className="task-step">02</span></div>
-                <div className="project-task"><span className="task-icon"><CheckCircle2 size={17} /></span><div>Test edip iyileştireceğiz<small>Son karar her zaman bizde.</small></div><span className="task-step">03</span></div>
+              <div className="window-bar"><span className="window-dots"><i /><i /><i /></span><span>cikis-karti</span><Layers3 size={14} /></div>
+              <div className="window-body"><div className="window-label">BUGÜN BİRLİKTE</div><h2>Çıkış Kartı<br />uygulamasını kuracağız.</h2><p>5. sınıf · Fen bilimleri · Fotosentez</p>
+                <div className="project-task"><span className="task-icon"><Check size={17} /></span><div>Planlayıp tasarlayacağız<small>İstem → Soru → Logo</small></div><span className="task-step">01</span></div>
+                <div className="project-task active"><span className="task-icon"><Terminal size={17} /></span><div>Ajanla kuracağız<small>Veritabanı → Uygulama → Panel</small></div><span className="task-step">02</span></div>
+                <div className="project-task"><span className="task-icon"><CheckCircle2 size={17} /></span><div>Paylaşıp yorumlayacağız<small>Yayın → QR → Yapay zekâ</small></div><span className="task-step">03</span></div>
                 <div className="window-footer"><span><i /> Öğretmen yönlendirir. Yapay zekâ üretir.</span><ArrowUpRight size={17} /></div>
               </div>
             </div>
-            <div className="floating-output"><span><Rocket size={20} /></span><div>Eğitimin çıktısı<small>Çalışan bir prototip</small></div><CheckCircle2 size={19} /></div>
-            <span className="visual-caption">FİKİR → PLAN → ÜRETİM → KONTROL</span>
+            <div className="floating-output"><span><Rocket size={20} /></span><div>Eğitimin çıktısı<small>Veritabanlı bir uygulama</small></div><CheckCircle2 size={19} /></div>
+            <span className="visual-caption">PLANLA → TASARLA → KUR → PAYLAŞ</span>
           </div>
         </section>
         <section className="event-overview" aria-labelledby="event-title"><h2 id="event-title">{trainingInfo.title}</h2><div className="event-facts"><div><CalendarDays size={21} /><span>TARİH<strong><time dateTime={trainingInfo.date}>{trainingInfo.dateLabel} · {trainingInfo.startTime}</time></strong></span></div><div><Clock3 size={21} /><span>SÜRE<strong>{trainingInfo.duration} · {trainingInfo.schedule}</strong></span></div><div><Monitor size={21} /><span>KATILIM<strong>Online · Canlı + kayıt</strong></span></div><div><Layers3 size={21} /><span>İÇERİK<strong>{trainingInfo.toolCount} araç · Proje tabanlı</strong></span></div></div></section>
         <Announcement />
         <section className="principles" aria-label="Eğitim yaklaşımımız"><div><BookOpen size={21} /><span>Kendi dersimizden başlayacağız</span></div><div><Layers3 size={21} /><span>Adım adım üreteceğiz</span></div><div><CheckCircle2 size={21} /><span>Öğretmen kontrolüyle ilerleyeceğiz</span></div></section>
+        <section className="project-section" aria-labelledby="project-title">
+          <div className="project-copy"><span className="eyebrow">TEK PROJE, BAŞTAN SONA</span><h2 id="project-title">{project.name}: kapıdan çıkmadan önce bir dakika.</h2><p>{project.summary}</p>
+            <ol className="project-flow">{project.flow.map((step, index) => <li key={step}><span>{index + 1}</span>{step}</li>)}</ol>
+            <p className="project-note"><CheckCircle2 size={18} /> {project.anyBranch}</p></div>
+          <div className="exit-card" role="img" aria-label="Çıkış Kartı uygulamasının örnek öğrenci ekranı: dersin nasıl geçtiği, üç duygu düğmesi, günün sorusu, iki metin kutusu ve gönder düğmesi.">
+            <div className="exit-card-head"><span>{project.name}</span><small>5. sınıf · Fen bilimleri</small></div>
+            <p className="exit-card-q">Bugünkü ders nasıldı?</p>
+            <div className="exit-card-moods"><span className="selected">😀<small>Anladım</small></span><span>😐<small>Kısmen</small></span><span>😕<small>Zorlandım</small></span></div>
+            <p className="exit-card-q">Günün sorusu: Bitkiler besinlerini nasıl üretir?</p>
+            <div className="exit-card-options"><span>A) Kökleriyle topraktan hazır alır</span><span className="selected">B) Güneş ışığıyla fotosentez yapar</span><span>C) Hayvanlardan besin alır</span></div>
+            <div className="exit-card-field">Bugün öğrendiğim bir şey…</div><div className="exit-card-field">Hâlâ merak ettiğim…</div>
+            <div className="exit-card-send">Kartı gönder</div>
+          </div>
+        </section>
         <section className="program-section" id="program">
-          <div className="section-heading"><div><span className="eyebrow">ÖĞRENME YOLCULUĞUMUZ</span><h2>Üç saat. Dört bölüm. Birlikte üreteceğimiz bir proje.</h2><p>45 dakikalık her bölüm bir önceki adımı geliştirecek; öğrendiğimizi bir ürüne dönüştüreceğiz.</p></div><span className="section-number">01 — 04</span></div>
+          <div className="section-heading"><div><span className="eyebrow">ÖĞRENME YOLCULUĞUMUZ</span><h2>Tek proje. Dört adım. Fikirden sınıfa.</h2><p>Temelden başlayacak, 30 dakikalık her bölümde {project.name}’na bir parça ekleyeceğiz: planlayacak, tasarlayacak, kuracak ve paylaşacağız.</p></div><span className="section-number">01 — 04</span></div>
           <div className="days-grid">{trainingDays.map(item => { const Icon = dayIcons[item.icon]; const count = item.lessons.filter(l => completed.includes(l.id)).length; return <button key={item.id} className={`day-card day-color-${item.id}`} onClick={() => navigate(`session${item.id}`)}>
             <div className="day-card-top"><span className="day-icon"><Icon size={22} /></span><span>{String(item.id).padStart(2, '0')} / BÖLÜM</span></div><span className="day-date">{item.timeRange} · {item.duration}</span><p className="day-subtitle">{item.subtitle}</p><h3>{item.title}</h3><p>{item.description}</p><div className="day-tool-chips">{learningTools.filter(tool => (dayPreviewTools[item.id] || []).includes(tool.id)).map(tool => <span key={tool.id}>{tool.name}</span>)}</div><div className="day-card-bottom"><span>{count ? `${count}/${item.lessons.length} adım tamamlandı` : `${item.lessons.length} uygulama adımı`}</span><ArrowUpRight size={20} /></div>
           </button>; })}</div>
         </section>
-        <section className="tools-teaser"><div><span className="eyebrow">DOĞRU İŞ İÇİN DOĞRU ARAÇ</span><h2>Araçları ezberlemeyeceğiz.<br />Ne işe yaradıklarını öğrenerek kullanacağız.</h2><p>{trainingInfo.toolCount} farklı araç; hangi bölümde, hangi amaçla kullanacağımızı birlikte keşfedeceğiz.</p><button className="button dark" onClick={() => navigate('tools')}>Araç kutusunu aç <ArrowRight size={18} /></button><button className="poster-shortcut" onClick={() => navigate('resources')}>Görsel araç haritasını incele <ArrowUpRight size={16} /></button></div><div className="tool-cloud">{['codex', 'claude', 'claude-code', 'canva', 'gamma', 'netlify'].map(id => { const tool = learningTools.find(t => t.id === id)!; return <a key={id} href={tool.url} target="_blank" rel="noopener noreferrer" className={`cloud-tool day-color-${tool.day}`}><span className="tool-logo">{tool.label}</span><span>{tool.name}<small>{toolDayLabel(tool)}</small></span><ArrowUpRight size={16} /><span className="sr-only">Yeni sekmede açılır</span></a>; })}</div></section>
+        <section className="concepts-section" aria-labelledby="concepts-title">
+          <div className="section-heading"><div><span className="eyebrow">TEMELDEN BAŞLIYORUZ</span><h2 id="concepts-title">Sekiz kavram, okul diliyle.</h2><p>Teknik terimleri sınıftan tanıdığımız benzetmelerle öğreneceğiz. İlk bölüme bu kartlarla başlayacağız.</p></div></div>
+          <div className="concept-grid">{concepts.map(concept => <article key={concept.term} className="concept-card"><span>{concept.term}</span><h3>{concept.analogy}</h3><p>{concept.text}</p></article>)}</div>
+        </section>
+        <section className="tools-teaser"><div><span className="eyebrow">DOĞRU İŞ İÇİN DOĞRU ARAÇ</span><h2>Araçları ezberlemeyeceğiz.<br />Ne işe yaradıklarını öğrenerek kullanacağız.</h2><p>{trainingInfo.toolCount} farklı araç; hangi bölümde, hangi amaçla kullanacağımızı birlikte keşfedeceğiz.</p><button className="button dark" onClick={() => navigate('tools')}>Araç kutusunu aç <ArrowRight size={18} /></button><button className="poster-shortcut" onClick={() => navigate('resources')}>Görsel araç haritasını incele <ArrowUpRight size={16} /></button></div><div className="tool-cloud">{['chatgpt', 'notebooklm', 'canva-code', 'supabase', 'claude-code', 'netlify'].map(id => { const tool = learningTools.find(t => t.id === id)!; return <a key={id} href={tool.url} target="_blank" rel="noopener noreferrer" className={`cloud-tool day-color-${tool.day}`}><span className="tool-logo">{tool.label}</span><span>{tool.name}<small>{toolDayLabel(tool)}</small></span><ArrowUpRight size={16} /><span className="sr-only">Yeni sekmede açılır</span></a>; })}</div></section>
         <section className="closing-note"><span className="note-icon"><Sparkles size={24} /></span><div><h3>Profesyonel yazılımcı olmamız gerekmiyor.</h3><p>Problemi tanımlayacağız, doğru görev vereceğiz ve ortaya çıkan ürünü kontrol edeceğiz.</p></div><button onClick={() => navigate('prompt')}>İlk istemimizi yazalım <ArrowRight size={18} /></button></section>
-        <section className="training-details"><div className="audience-copy"><span className="eyebrow">KİMLER İÇİN?</span><h2>Kendi dersinde üreten tüm öğretmenler için.</h2><p>{trainingInfo.audience} katılabilir. Temel dijital becerilerle başlayacak; üç saatte içerik üretimi, etkileşimli materyal, kendi asistanımızı tasarlama ve proje yayınlama deneyimi kazanacağız.</p></div><div className="trainer-list"><span className="eyebrow">EĞİTMENİMİZ</span>{trainingInfo.trainers.map(trainer => <article key={trainer.name} className="trainer-card"><span>{trainer.initials}</span><div><h3>{trainer.name}</h3><p>{trainer.role}</p></div></article>)}</div></section>
+        <section className="training-details"><div className="audience-copy"><span className="eyebrow">KİMLER İÇİN?</span><h2>Kendi dersinde üreten tüm öğretmenler için.</h2><p>{trainingInfo.audience} katılabilir. Temel kavramlardan başlayacak; istem yazma, içerik ve tasarım üretimi, veritabanı kurma, uygulama geliştirme ve yayınlama deneyimi kazanacağız.</p></div><div className="trainer-list"><span className="eyebrow">EĞİTMENİMİZ</span>{trainingInfo.trainers.map(trainer => <article key={trainer.name} className="trainer-card"><span>{trainer.initials}</span><div><h3>{trainer.name}</h3><p>{trainer.role}</p></div></article>)}</div></section>
         <section className="community-banner"><img src={logo} alt="GencbeyinlerNet logosu" width="900" height="900" loading="lazy" /><div><span className="eyebrow">GENCBEYİNLERNET İLE BİRLİKTE</span><h2>Üreten öğretmenlerin buluşma noktası.</h2><p>Eğitimlerimiz, paylaşımlarımız ve yeni duyurularımız için kurum sitemizi ziyaret edin.</p></div><a className="button institution-link" href={institutionUrl} target="_blank" rel="noopener noreferrer">www.gencbeyinler.net <ArrowUpRight size={18} /><span className="sr-only">Yeni sekmede açılır</span></a></section>
         <section className="application-banner"><div><span className="eyebrow">TÜM KAYNAKLARIMIZ</span><h2>Yapay zekâyla üreten öğretmenler için kaynaklarımız tek adreste.</h2><p>Eğitim programı, araç kutusu, rehberler ve istem atölyesi bu sitede.</p></div><a className="button primary" href={trainingInfo.resourcesUrl} onClick={event => { if (!isPlainLeftClick(event)) return; event.preventDefault(); navigate('resources'); }}>Tüm kaynaklarımız <ArrowUpRight size={18} /></a></section>
       </>}
@@ -137,7 +155,7 @@ export default function App() {
           <nav aria-label={`${day.id}. bölümün konuları`}>{day.lessons.map((item, index) => <button key={item.id} className={lesson.id === item.id ? 'selected' : ''} onClick={() => selectLesson(item.id)} aria-current={lesson.id === item.id ? 'step' : undefined}><span className="lesson-number">{completed.includes(item.id) ? <Check size={16} /> : String(index + 1).padStart(2, '0')}</span><span>{item.title}</span><ChevronRight size={15} /></button>)}</nav>
           <a href="#day-tools" className="sidebar-tools">Bu bölümün araçları <ArrowDown size={16} /></a></aside>
           <article className="lesson-content"><div className="lesson-kicker"><span>ADIM {String(day.lessons.indexOf(lesson) + 1).padStart(2, '0')}</span><span>{lesson.minutes} dk · Birlikte uygulayacağız</span></div><h2 id="lesson-title" tabIndex={-1}>{lesson.title}</h2><p className="lesson-description">{lesson.description}</p><h3>Nasıl ilerleyeceğiz?</h3><ol className="lesson-steps">{lesson.steps.map((step, i) => <li key={step}><span>{i + 1}</span><p>{step}</p></li>)}</ol>
-            {lesson.prompt && <CopyBlock text={lesson.prompt} />}{lesson.code && <CopyBlock text={lesson.code} isCode />}
+            {lesson.prompt && <CopyBlock text={lesson.prompt} />}{lesson.code && <CopyBlock text={lesson.code} isCode label={lesson.codeLabel} />}
             <div className="lesson-output"><CheckCircle2 size={21} /><div><span>ORTAYA NE ÇIKARACAĞIZ?</span><p>{lesson.output}</p></div></div>
             <div className="lesson-actions"><button className={`button ${completed.includes(lesson.id) ? 'completed-button' : 'primary'}`} aria-pressed={completed.includes(lesson.id)} onClick={() => toggleLesson(lesson.id)}>{completed.includes(lesson.id) ? <CheckCircle2 size={18} /> : <Circle size={18} />}{completed.includes(lesson.id) ? 'Bu adımı tamamladım' : 'Tamamlandı olarak işaretle'}</button>{day.lessons.indexOf(lesson) < day.lessons.length - 1 ? <button className="button subtle" onClick={() => selectLesson(day.lessons[day.lessons.indexOf(lesson) + 1].id)}>Sonraki adım <ArrowRight size={17} /></button> : day.id < trainingDays.length && <button className="button subtle" onClick={() => navigate(`session${day.id + 1}`)}>{day.id + 1}. bölüme geç <ArrowRight size={17} /></button>}</div>
           </article></div>
