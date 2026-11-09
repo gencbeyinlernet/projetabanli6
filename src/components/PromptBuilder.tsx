@@ -3,7 +3,7 @@ import { Check, Copy, Sparkles } from 'lucide-react';
 
 const examples = [
   { label: 'Ders etkinliği', role: 'Bir fen bilimleri öğretmenisin.', goal: '5. sınıf öğrencileri için fotosentezi anlatan 20 dakikalık bir etkinlik planı hazırla.', boundary: 'Malzemeler, uygulama adımları ve 3 değerlendirme sorusu ekle. Dili sade tut; bilimsel doğruluğu kontrol et.' },
-  { label: 'Uygulama geliştirme', role: 'Eğitim uygulamaları geliştiren bir yazılım ajanısın.', goal: '“Çıkış Kartı” adlı bir web uygulaması geliştir: öğrenci ders sonunda dersi nasıl bulduğunu, günün sorusuna cevabını ve hâlâ merak ettiğini göndersin; öğretmen bir panelde özeti görsün.', boundary: 'Önce kısa bir plan öner. Tek bir index.html dosyası kullan. Kartları Supabase’e kaydet. Telefon ekranına uyum sağla. Öğrenciden kişisel bilgi alma. Her adımın sonunda test edeceğimiz işlemleri belirt.' },
+  { label: 'Uygulama geliştirme', role: 'Eğitim uygulamaları geliştiren bir yazılım ajanısın.', goal: '5. sınıf fotosentez konusunu öğreten bir web uygulaması geliştir. Konu anlatımı, etkileşimli etkinlik ve üç soru olsun.', boundary: 'Önce plan ve dosya yapısı öner. Küçük adımlarla ilerle. Telefon ekranına uyum sağla. Öğrenci kişisel verilerini toplama. Her adımın sonunda test edeceğimiz işlemleri belirt.' },
   { label: 'Değerlendirme', role: 'Bir ölçme ve değerlendirme uzmanısın.', goal: '5. sınıf fotosentez kazanımına uygun 5 soruluk bir değerlendirme taslağı hazırla.', boundary: 'Her soru için doğru cevabı ve kısa açıklamasını ekle. Soruları kolaydan zora sırala. Cevapları öğretmen kontrolüne sun.' },
 ];
 

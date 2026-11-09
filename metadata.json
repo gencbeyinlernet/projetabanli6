@@ -1,6 +1,6 @@
 {
   "name": "GencbeyinlerNet Proje Tabanli Yapay Zeka Eğitimi",
-  "description": "9 Kasım 2026 Pazartesi, 21.00 · 3 saat, 16 araç: Temelden başlayıp veritabanlı bir sınıf uygulaması (Çıkış Kartı) kurduğumuz uygulamalı yapay zekâ eğitimi.",
+  "description": "9 Kasım 2026 Pazartesi, 21.00 · 3 saat, 4 bölüm, 15 araç: ChatGPT/Codex ve Claude ekosistemleri ile öğretmenler için uygulamalı proje tabanlı yapay zekâ eğitimi.",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"

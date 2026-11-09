@@ -1,6 +1,6 @@
 # GencbeyinlerNet Proje Tabanli Yapay Zeka Eğitimi
 
-Öğretmenler için 3 saatlik uygulama kılavuzu. Eğitim boyunca tek bir proje (Çıkış Kartı) kurulur: 30 dakikalık dört bölüm, temel kavramlar, araçların kullanım amaçları, kopyalanabilir istemler ve istem atölyesi içerir. Eğitmen akışı `docs/egitim-akisi.md` dosyasındadır.
+Öğretmenler için 3 saatlik uygulama kılavuzu. 45 dakikalık dört bölüm, araçların kullanım amaçları, örnek görevler ve istem atölyesi içerir.
 
 ## Geliştirme
 
@@ -51,4 +51,4 @@ Güncel programın ve bölüme özel araçların ortak kaynağı `src/data/curri
 
 GitHub'a yüklenen iki JPEG, `src/data/brand.ts` üzerinden kullanılır. Logo üst bölümde, kurum tanıtımında, alt bölümde ve sekme simgesinde gösterilir. Kurum bağlantıları `https://www.gencbeyinler.net/` adresini yeni sekmede açar; kılavuzun yayın adresi GitHub Pages olarak kalır.
 
-Araç kutusu afişi Kaynaklar bölümündedir ve tam boy açılabilir. Afiş genel bir araç haritasıdır; içindeki araç ve ücret etiketleri, eğitimdeki güncel 16 araçlık listeden farklı olabilir. Görsel güncellendiğinde bu açıklama da gözden geçirilmelidir.
+Araç kutusu afişi Kaynaklar bölümündedir ve tam boy açılabilir. Afiş genel bir araç haritasıdır; içindeki araç ve ücret etiketleri, eğitimdeki güncel 15 araçlık listeden farklı olabilir. Görsel güncellendiğinde bu açıklama da gözden geçirilmelidir.
