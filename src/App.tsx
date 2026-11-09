@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
-import { ArrowDown, ArrowRight, ArrowUpRight, BookOpen, Check, CheckCircle2, ChevronRight, Circle, Clock3, Copy, ExternalLink, Layers3, Monitor, Palette, Rocket, Search, Sparkles, Terminal, CalendarDays } from 'lucide-react';
+import { lazy, Suspense, useEffect, useState } from 'react';
+import { ArrowDown, ArrowRight, ArrowUpRight, BookOpen, Check, CheckCircle2, ChevronRight, Circle, Clock3, ExternalLink, Layers3, Lock, Monitor, Palette, Rocket, Search, Sparkles, Terminal, CalendarDays } from 'lucide-react';
 import Header from './components/Header';
 import PromptBuilder from './components/PromptBuilder';
 import BrainAssistant from './components/BrainAssistant';
 import ToolboxPoster from './components/ToolboxPoster';
 import Announcement from './components/Announcement';
+import CopyBlock from './components/CopyBlock';
 import { institutionUrl, logo } from './data/brand';
 import { learningTools, trainingDays, trainingInfo, toolAppearsOnDay, toolDayLabel, type LearningTool } from './data/curriculum';
 import { additionalResources } from './data/resourcesData';
@@ -18,6 +19,8 @@ const dayPreviewTools: Record<number, string[]> = {
   4: ['forms', 'github', 'netlify'],
 };
 const progressKey = 'projetabanli6-completed-v1';
+const trainerHash = '#egitmen';
+const TrainerArea = lazy(() => import('./components/TrainerArea'));
 const validLessonIds = new Set(trainingDays.flatMap(day => day.lessons.map(lesson => lesson.id)));
 
 function ToolCard({ tool }: { tool: LearningTool }) {
@@ -30,27 +33,8 @@ function ToolCard({ tool }: { tool: LearningTool }) {
   </article>;
 }
 
-function CopyBlock({ text, isCode = false }: { text: string; isCode?: boolean }) {
-  const [copied, setCopied] = useState(false);
-  const [error, setError] = useState(false);
-  useEffect(() => { setCopied(false); setError(false); }, [text]);
-  useEffect(() => {
-    if (!copied) return;
-    const timeout = window.setTimeout(() => setCopied(false), 2000);
-    return () => window.clearTimeout(timeout);
-  }, [copied]);
-  async function copy() {
-    try { await navigator.clipboard.writeText(text); setCopied(true); setError(false); }
-    catch { setError(true); }
-  }
-  return <div className={`copy-block ${isCode ? 'code-block' : ''}`}>
-    <div className="copy-heading"><span>{isCode ? 'Terminalde deneyeceğiz' : 'Birlikte deneyeceğimiz istem'}</span><button onClick={copy} aria-label="Örnek metni kopyala">{copied ? <Check size={15} /> : <Copy size={15} />}{copied ? 'Kopyalandı' : 'Kopyala'}</button></div>
-    <pre>{text}</pre>{error && <p role="status">Kopyalama kullanılamıyor. Metni seçerek kopyalayabilirsiniz.</p>}
-  </div>;
-}
-
 export default function App() {
-  const [currentTab, setCurrentTab] = useState('home');
+  const [currentTab, setCurrentTab] = useState(() => typeof window !== 'undefined' && window.location.hash === trainerHash ? 'trainer' : 'home');
   const [lessonId, setLessonId] = useState('');
   const [query, setQuery] = useState('');
   const [toolDay, setToolDay] = useState(0);
@@ -64,7 +48,13 @@ export default function App() {
   useEffect(() => {
     try { localStorage.setItem(progressKey, JSON.stringify(completed)); } catch { /* Progress works in memory if storage is unavailable. */ }
   }, [completed]);
+  useEffect(() => {
+    function onHash() { if (window.location.hash === trainerHash) { setCurrentTab('trainer'); window.scrollTo({ top: 0, behavior: 'instant' }); } }
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  }, []);
   function navigate(tab: string) {
+    if (tab !== 'trainer' && window.location.hash === trainerHash) window.history.replaceState(null, '', window.location.pathname + window.location.search);
     setCurrentTab(tab); setLessonId(''); setQuery(''); setToolDay(0);
     window.scrollTo({ top: 0, behavior: 'instant' });
   }
@@ -152,9 +142,10 @@ export default function App() {
       {currentTab === 'resources' && <>
         <div className="page-intro"><span className="eyebrow">OKUYACAĞIZ. KARŞILAŞTIRACAĞIZ. DOĞRULAYACAĞIZ.</span><h1>Sağlam bir kaynakla başlayacağız.</h1><p>İçeriklerimizi hazırlarken etik ilkeleri, resmî rehberleri ve araştırma kaynaklarını kullanacağız.</p></div><ToolboxPoster /><div className="resource-grid">{additionalResources.map((resource, i) => <a key={resource.id} href={resource.url} target="_blank" rel="noopener noreferrer" className="resource-card"><span className="resource-index">{String(i + 1).padStart(2, '0')}</span><div><h2>{resource.title.replace(/^\d+\. /, '')}</h2><p>{resource.description}</p><span>Kaynağı incele <ExternalLink size={14} /><span className="sr-only">Yeni sekmede açılır</span></span></div><ArrowUpRight size={20} /></a>)}</div>
       </>}
+      {currentTab === 'trainer' && <Suspense fallback={<p className="trainer-loading" role="status">Yükleniyor…</p>}><TrainerArea onExit={() => navigate('home')} /></Suspense>}
       {currentTab === 'prompt' && <><div className="page-intro"><span className="eyebrow">İSTEM ATÖLYESİ</span><h1>İyi bir ürün, açık bir görevle başlayacak.</h1><p>Rolü, hedefi ve sınırları belirleyecek; hazırladığımız istemi seçtiğimiz araçta deneyip geliştireceğiz.</p></div><PromptBuilder /></>}
     </main>
-    <footer className="site-footer"><div className="footer-inner"><div><a className="footer-brand" href={institutionUrl} target="_blank" rel="noopener noreferrer"><img src={logo} alt="" width="900" height="900" loading="lazy" /> GencbeyinlerNet <ArrowUpRight size={16} /><span className="sr-only">Kurum sitesi, yeni sekmede açılır</span></a><p>Yapay zekâyla üreten öğretmenler için.</p></div><div className="footer-progress"><span>Öğrenme yolculuğum <b>{progress}%</b></span><div className="progress-track"><i style={{ width: `${progress}%` }} /></div><small>İlerleme bu tarayıcıda saklanır.</small></div><span className="footer-credit">Birlikte planlayacağız.<br />Birlikte üreteceğiz.</span></div></footer>
+    <footer className="site-footer"><div className="footer-inner"><div><a className="footer-brand" href={institutionUrl} target="_blank" rel="noopener noreferrer"><img src={logo} alt="" width="900" height="900" loading="lazy" /> GencbeyinlerNet <ArrowUpRight size={16} /><span className="sr-only">Kurum sitesi, yeni sekmede açılır</span></a><p>Yapay zekâyla üreten öğretmenler için.</p><a className="footer-trainer" href={trainerHash}><Lock size={12} /> Eğitmen girişi</a></div><div className="footer-progress"><span>Öğrenme yolculuğum <b>{progress}%</b></span><div className="progress-track"><i style={{ width: `${progress}%` }} /></div><small>İlerleme bu tarayıcıda saklanır.</small></div><span className="footer-credit">Birlikte planlayacağız.<br />Birlikte üreteceğiz.</span></div></footer>
     {import.meta.env.MODE !== 'pages' && <BrainAssistant />}
   </>;
 }
